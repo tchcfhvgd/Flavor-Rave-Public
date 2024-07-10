@@ -10,12 +10,10 @@ import lime.utils.Assets as LimeAssets;
 import openfl.utils.Assets;
 
 using StringTools;
-#if desktop
+
 import sys.FileSystem;
 import sys.io.File;
-#else
 import openfl.utils.Assets;
-#end
 
 class CoolUtil
 {
