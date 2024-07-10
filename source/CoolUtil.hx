@@ -10,7 +10,7 @@ import lime.utils.Assets as LimeAssets;
 import openfl.utils.Assets;
 
 using StringTools;
-#if sys
+#if desktop
 import sys.FileSystem;
 import sys.io.File;
 #else
@@ -89,7 +89,7 @@ class CoolUtil
 	public static function coolTextFile(path:String):Array<String>
 	{
 		var daList:Array<String> = [];
-		#if sys
+		#if desktop
 		if(FileSystem.exists(path)) daList = File.getContent(path).trim().split('\n');
 		#else
 		if(Assets.exists(path)) daList = Assets.getText(path).trim().split('\n');
