@@ -183,7 +183,6 @@ class VisualsUISubState extends BaseOptionsMenu
 		addOption(option);
 		*/
 
-		#if !mobile
 		var option:Option = new Option('FPS Counter',
 			'If unchecked, hides the FPS Counter.',
 			'showFPS',
@@ -213,7 +212,6 @@ class VisualsUISubState extends BaseOptionsMenu
 			false);
 		addOption(option);		
 		*/
-		#end
 
 		var option:Option = new Option('Watermarks',
 			'Enable and disable all watermarks from the engine.',
