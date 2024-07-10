@@ -14,7 +14,9 @@ import openfl.events.Event;
 using StringTools;
 //crash handler stuff
 #if CRASH_HANDLER
+#if desktop
 import Discord.DiscordClient;
+#end
 import haxe.CallStack;
 import haxe.io.Path;
 import openfl.events.UncaughtErrorEvent;
@@ -37,6 +39,11 @@ import sys.io.Process;
 
 	#pragma comment(lib, "Dwmapi")
 ')
+#end
+
+#if android
+import android.content.Context;
+import android.os.Build;
 #end
 class Main extends Sprite
 {
@@ -86,6 +93,12 @@ class Main extends Sprite
 
 		super();
 
+		#if android
+		Sys.setCwd(Path.addTrailingSlash(Context.getExternalFilesDir()));
+		#elseif ios
+		Sys.setCwd(System.documentsDirectory);
+		#end
+		
 		if (stage != null)
 		{
 			init();
@@ -118,7 +131,6 @@ class Main extends Sprite
 		ClientPrefs.loadDefaultKeys();
 		addChild(new FlxGame(gameWidth, gameHeight, initialState, framerate, framerate, skipSplash, startFullscreen));
 
-		#if !mobile
 		fpsVar = new FPSDisplay(10, 3, 0xFFFFFF);
 		addChild(fpsVar);
 		Lib.current.stage.align = "tl";
@@ -126,7 +138,6 @@ class Main extends Sprite
 		if(fpsVar != null) {
 			fpsVar.visible = ClientPrefs.showFPS;
 		}
-		#end
 
 		#if html5
 		FlxG.autoPause = false;
@@ -142,6 +153,10 @@ class Main extends Sprite
 
 		#if CRASH_HANDLER
 		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);
+		#end
+
+		#if android
+		FlxG.android.preventDefaultKeys = [BACK];
 		#end
 	}
 
@@ -159,7 +174,7 @@ class Main extends Sprite
 		dateNow = dateNow.replace(" ", "_");
 		dateNow = dateNow.replace(":", "'");
 
-		path = "./crash/" + "FlavorRave_" + dateNow + ".txt";
+		path = "crash/" + "FlavorRave_" + dateNow + ".txt";
 
 		for (stackItem in callStack)
 		{
@@ -178,8 +193,8 @@ class Main extends Sprite
 		#end
 		errMsg += "\n\n> Crash Handler written by: sqirra-rng";
 
-		if (!FileSystem.exists("./crash/"))
-			FileSystem.createDirectory("./crash/");
+		if (!FileSystem.exists("crash/"))
+			FileSystem.createDirectory("crash/");
 
 		File.saveContent(path, errMsg + "\n");
 
@@ -187,7 +202,9 @@ class Main extends Sprite
 		Sys.println("Crash dump saved in " + Path.normalize(path));
 
 		FlxG.stage.application.window.alert(errMsg, "Error!");
+		#if desktop
 		DiscordClient.shutdown();
+		#end
 		Sys.exit(1);
 	}
 	#end
