@@ -36,8 +36,8 @@ class AndroidSettingsSubState extends BaseOptionsMenu
 {
 	public function new()
 	{
-		title = 'Android Controls Settings';
-		rpcTitle = 'Android Controls Settings Menu'; // hi, you can ask what is that, i will answer it's all what you needed lol.
+		title = 'Mobile Controls Settings';
+		rpcTitle = 'Mobile Controls Settings Menu'; // hi, you can ask what is that, i will answer it's all what you needed lol.
 
 		var option:Option = new Option('Vpad Opacity', // mariomaster was here again
 			'Changes Vpad Opacity -yeah ', 'padalpha', 'float', 0.5);
@@ -56,6 +56,14 @@ class AndroidSettingsSubState extends BaseOptionsMenu
 		option.changeValue = 0.01;
 		option.decimals = 2;
 		addOption(option);
+
+		var option:Option = new Option('Hitbox Design',
+			'Choose how your hitbox should look like.',
+			'hitboxType',
+			'string',
+			null,
+			hintOptions);
+			addOption(option);
 
 		super();
 	}
