@@ -16,6 +16,7 @@ import flixel.graphics.FlxGraphic;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.input.keyboard.FlxKey;
 import flixel.math.FlxMath;
+import flixel.addons.transition.FlxTransitionableState;
 import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
@@ -112,6 +113,11 @@ class ControlsSubState extends MusicBeatSubstate {
 		bottomBoarder.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bottomBoarder);
 
+		#if mobile
+                addVirtualPad(LEFT_FULL, B);
+                addVirtualPadCamera(false);
+                #end
+		
 		changeSelection();
 	}
 
@@ -131,7 +137,12 @@ class ControlsSubState extends MusicBeatSubstate {
 
 			if (controls.BACK) {
 				ClientPrefs.reloadControls();
-				close();
+				#if mobile
+                        FlxTransitionableState.skipNextTransOut = true;
+			FlxG.resetState();
+                        #else
+                        close();
+                        #end
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 			}
 
