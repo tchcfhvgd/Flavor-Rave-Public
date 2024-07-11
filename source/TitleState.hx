@@ -253,7 +253,7 @@ class TitleState extends MusicBeatState
 			#if VIDEOS_ALLOWED
 			var video:VideoHandler = new VideoHandler();
 			video.canSkip = true;
-			video.skipKeys = [FlxKey.ESCAPE, FlxKey.ENTER #if android || FlxG.android.justReleased.BACK #end];
+			video.skipKeys = [FlxKey.ESCAPE, FlxKey.ENTER #if android ,FlxG.android.justReleased.BACK #end];
 			video.onEndReached.add(function()
 			{
 				skipIntro();
