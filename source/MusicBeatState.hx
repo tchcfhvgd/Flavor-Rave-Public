@@ -118,27 +118,6 @@ class MusicBeatState extends FlxUIState
 			}
 		}
 		#end
-
-		override function destroy()
-		{
-			#if mobile
-			if (trackedInputsMobileControls.length > 0)
-			controls.removeVirtualControlsInput(trackedInputsMobileControls);
-
-			if (trackedInputsVirtualPad.length > 0)
-			controls.removeVirtualControlsInput(trackedInputsVirtualPad);
-			#end
-
-			super.destroy();
-
-			#if mobile
-			if (virtualPad != null)
-			virtualPad = FlxDestroyUtil.destroy(virtualPad);
-
-			if (mobileControls != null)
-			mobileControls = FlxDestroyUtil.destroy(mobileControls);
-			#end
-		}
 	
 	override function remove(Object:FlxBasic, Splice:Bool = false):FlxBasic
 	{
@@ -210,7 +189,23 @@ class MusicBeatState extends FlxUIState
 	override function destroy():Void
 	{
 		cancelTweens();
-		super.destroy();
+		#if mobile
+			if (trackedInputsMobileControls.length > 0)
+			controls.removeVirtualControlsInput(trackedInputsMobileControls);
+
+			if (trackedInputsVirtualPad.length > 0)
+			controls.removeVirtualControlsInput(trackedInputsVirtualPad);
+			#end
+
+			super.destroy();
+
+			#if mobile
+			if (virtualPad != null)
+			virtualPad = FlxDestroyUtil.destroy(virtualPad);
+
+			if (mobileControls != null)
+			mobileControls = FlxDestroyUtil.destroy(mobileControls);
+			#end
 	}
 
 	private function updateSection():Void
