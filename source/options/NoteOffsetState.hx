@@ -8,6 +8,7 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.group.FlxSpriteGroup;
 import flixel.math.FlxPoint;
 import flixel.text.FlxText;
+import flixel.addons.transition.FlxTransitionableState;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
@@ -374,6 +375,10 @@ class NoteOffsetState extends MusicBeatState
 		Conductor.bpm = 128.0;
 		FlxG.sound.playMusic(Paths.music('offsetSong'), 1, true);
 
+		#if android
+                addVirtualPad(LEFT_RIGHT, A_B_C);
+                #end
+		
 		super.create();
 	}
 
@@ -482,7 +487,7 @@ class NoteOffsetState extends MusicBeatState
 				}
 			}
 
-			if(controls.RESET)
+			if(controls.RESET #if android || virtualPad.buttonC.justPressed #end)
 			{
 				for (i in 0...ClientPrefs.comboOffset.length)
 				{
@@ -520,7 +525,7 @@ class NoteOffsetState extends MusicBeatState
 				updateNoteDelay();
 			}
 
-			if(controls.RESET)
+			if(controls.RESET #if android || virtualPad.buttonC.justPressed #end)
 			{
 				holdTime = 0;
 				barPercent = 0;
