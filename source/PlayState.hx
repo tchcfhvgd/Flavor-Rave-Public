@@ -899,6 +899,11 @@ class PlayState extends MusicBeatState
 		botplayTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
 
+		#if mobile
+   addMobileControls(false);
+   mobileControls.visible = false;
+   #end
+
 		#if LUA_ALLOWED
 		for (notetype in noteTypeMap.keys())
 		{
@@ -1432,6 +1437,9 @@ class PlayState extends MusicBeatState
 	//You don't have to add a song, just saying. You can just do "startDialogue(dialogueJson);" and it should work
 	public function startDialogue(dialogueFile:DialogueFile, ?song:String = null):Void
 	{
+		#if mobile
+		mobileControls.visible = false;
+		#end
 		// TO DO: Make this more flexible, maybe?
 		if(psychDialogue != null) return;
 
@@ -1468,6 +1476,10 @@ class PlayState extends MusicBeatState
 
 	public function startDreamcastDialogue(dialogueFile:DreamcastDialogueFile):Void
 	{
+		#if mobile
+		mobileControls.visible = false;
+		#end
+		
 		if (dialogueFile == null)
 		{
 			FlxG.log.warn("Your dialogue file doesn't exist!");
@@ -1568,6 +1580,9 @@ class PlayState extends MusicBeatState
 
 			if (skipCountdown || hasTitleCard || startOnTime > 0) skipArrowStartTween = true;
 
+			#if mobile
+		mobileControls.visible = true;
+		#end
 			generateStaticArrows(0);
 			generateStaticArrows(1);
 			for (i in 0...playerStrums.length) {
@@ -2739,7 +2754,7 @@ class PlayState extends MusicBeatState
 			botplayTxt.alpha = 1 - Math.sin((Math.PI * botplaySine) / 180);
 		}
 
-		if (controls.PAUSE && startedCountdown && canPause)
+		if (controls.PAUSE #if android || FlxG.android.justReleased.BACK #end && startedCountdown && canPause)
 		{
 			var ret:Dynamic = callOnLuas('onPause', [], false);
 			if(ret != FunkinLua.Function_Stop) {
@@ -4042,6 +4057,9 @@ class PlayState extends MusicBeatState
 		updateTime = false;
 
 		seenCutscene = false;
+		#if mobile
+		mobileControls.visible = false;
+		#end
 
 		var ret:Dynamic = callOnLuas('onEndSong', [], false);
 
