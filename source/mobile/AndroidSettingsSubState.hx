@@ -61,8 +61,8 @@ class AndroidSettingsSubState extends BaseOptionsMenu
 			'Choose how your hitbox should look like.',
 			'hitboxType',
 			'string',
-			null,
-			hintOptions);
+			null
+		        );
 			addOption(option);
 
 		super();
