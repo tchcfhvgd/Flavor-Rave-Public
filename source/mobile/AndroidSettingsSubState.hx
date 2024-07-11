@@ -34,6 +34,8 @@ using StringTools;
 
 class AndroidSettingsSubState extends BaseOptionsMenu
 {
+final hintOptions:Array<String> = ["No Gradient", "No Gradient (Old)", "Gradient", "Hidden"];
+	
 	public function new()
 	{
 		title = 'Mobile Controls Settings';
@@ -61,8 +63,8 @@ class AndroidSettingsSubState extends BaseOptionsMenu
 			'Choose how your hitbox should look like.',
 			'hitboxType',
 			'string',
-			null
-		        );
+			null,
+			hintOptions);
 			addOption(option);
 
 		super();
