@@ -123,7 +123,7 @@ class GameOverSubState extends MusicBeatSubstate
 		add(camFollowPos);
 
 		FlxG.sound.play(Paths.sound('newgameover'));
-
+		
 		FlxTween.tween(blackShit, {alpha: 0}, 0.1, {ease: FlxEase.sineOut, startDelay: 1.147});
 		FlxTween.tween(chara, {'offset.y': chara.spriteOffset[1]}, 1, {ease: FlxEase.cubeOut, startDelay: 1.147});
 		FlxTween.tween(outshined, {y: 40, angle: 0}, 0.5, {ease: FlxEase.sineOut, startDelay: 2.251});
@@ -136,6 +136,10 @@ class GameOverSubState extends MusicBeatSubstate
 			FlxTween.tween(nobutt, {alpha: 1}, 0.3, {ease: FlxEase.sineOut});
 		});
 
+	        #if android
+                addVirtualPad(NONE, A_B);
+                addVirtualPadCamera(false);
+                #end
 	}
 
 	override function update(elapsed:Float)
