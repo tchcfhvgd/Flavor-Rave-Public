@@ -114,6 +114,19 @@ class DialogueBoxDreamcast extends FlxSpriteGroup
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
+		
+                #if mobile
+                        var justTouched:Bool = false;
+
+		        for (touch in FlxG.touches.list)
+		        {
+			        if (touch.justPressed)
+			        {
+				        justTouched = true;
+			        }
+		        }
+		        #end
+		
 		#if FORCE_DEBUG_VERSION
 		if (FlxG.keys.pressed.CONTROL && (FlxG.keys.pressed.I || FlxG.keys.pressed.J || FlxG.keys.pressed.K || FlxG.keys.pressed.L))
 		{
@@ -133,7 +146,7 @@ class DialogueBoxDreamcast extends FlxSpriteGroup
 
 		if (allowInput)
 		{
-			if (PlayerSettings.player1.controls.ACCEPT)
+			if (PlayerSettings.player1.controls.ACCEPT #if mobile || justTouched #end)
 			{
 				if (!dialogueEnded)
 				{
@@ -150,7 +163,7 @@ class DialogueBoxDreamcast extends FlxSpriteGroup
 						closeDialogue();
 				}
 			}
-			else if (PlayerSettings.player1.controls.BACK)
+			else if (PlayerSettings.player1.controls.BACK #if android || FlxG.android.justReleased.BACK #end)
 			{
 				closeDialogue();
 			}
