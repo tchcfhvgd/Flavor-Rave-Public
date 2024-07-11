@@ -154,7 +154,11 @@ class PauseSubState extends MusicBeatSubstate
 		FlxTween.tween(topBoarder, {y: 0}, 0.4, {ease: FlxEase.quartOut, startDelay: 0.2});
 		FlxTween.tween(bottomBoarder, {y: 647}, 0.4, {ease: FlxEase.quartOut, startDelay: 0.2});
 
-
+                #if android
+                addVirtualPad(UP_DOWN, A);
+                addVirtualPadCamera(false);
+                #end
+		
 		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 
 		new FlxTimer().start(1, function(tmr:FlxTimer)
