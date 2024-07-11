@@ -11,6 +11,9 @@ class ClientPrefs {
 	public static var middleScroll:Bool = false;
 	public static var opponentStrums:Bool = true;
 	public static var showFPS:Bool = false;
+	public static var mobileCEx:Bool = false;
+	public static var hitboxType:String = "No Gradient";
+	public static var hitboxPos:Bool = true;
 	public static var showMemory:Bool = false;
 	public static var showPeak:Bool = false;
 	public static var fpsBorder:Bool = false;
@@ -39,6 +42,8 @@ class ClientPrefs {
 	public static var dynamicLaneOpacity:Bool = false;
 	public static var displayNPS:Bool = true;
 	public static var displayRating:Bool = true;
+	public static var padalpha:Float = 0.6;
+	public static var hitboxalpha:Float = 0.15;
 	public static var showRating:Bool = true;
 	public static var timingIndicator:String = 'Precise';
 	public static var controllerMode:Bool = false;
@@ -131,6 +136,9 @@ class ClientPrefs {
 		FlxG.save.data.noteSkin = noteSkin;
 		FlxG.save.data.noteSplashes = noteSplashes;
 		FlxG.save.data.lowQuality = lowQuality;
+		FlxG.save.data.mobileCEx = mobileCEx;
+		FlxG.save.data.hitboxType = hitboxType;
+		FlxG.save.data.hitboxPos = hitboxPos;
 		FlxG.save.data.shaders = shaders;
 		FlxG.save.data.framerate = framerate;
 		FlxG.save.data.gpuTextures = gpuTextures;
@@ -138,6 +146,8 @@ class ClientPrefs {
 		//FlxG.save.data.violence = violence;
 		FlxG.save.data.noteOffset = noteOffset;
 		FlxG.save.data.hideHud = hideHud;
+		FlxG.save.data.hitboxalpha = hitboxalpha;
+		FlxG.save.data.padalpha = padalpha;
 		FlxG.save.data.ghostTapping = ghostTapping;
 		FlxG.save.data.timeBarType = timeBarType;
 		FlxG.save.data.scoreZoom = scoreZoom;
@@ -208,6 +218,15 @@ class ClientPrefs {
 		if(FlxG.save.data.globalAntialiasing != null) {
 			globalAntialiasing = FlxG.save.data.globalAntialiasing;
 		}
+		if(FlxG.save.data.mobileCEx != null) {
+			mobileCEx = FlxG.save.data.mobileCEx;
+		}
+		if(FlxG.save.data.hitboxType != null) {
+			hitboxType = FlxG.save.data.hitboxType;
+		}
+		if(FlxG.save.data.hitboxPos != null) {
+			hitboxPos = FlxG.save.data.hitboxPos;
+		}
 		if(FlxG.save.data.noteSplashes != null) {
 			noteSplashes = FlxG.save.data.noteSplashes;
 		}
@@ -216,6 +235,12 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.lowQuality != null) {
 			lowQuality = FlxG.save.data.lowQuality;
+		}
+		if(FlxG.save.data.hitboxalpha != null) {
+			hitboxalpha = FlxG.save.data.hitboxalpha;
+		}
+		if(FlxG.save.data.padalpha != null) {
+			padalpha = FlxG.save.data.padalpha;
 		}
 		if(FlxG.save.data.shaders != null) {
 			shaders = FlxG.save.data.shaders;
