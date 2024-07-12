@@ -123,7 +123,7 @@ class ResultsScreenSubState extends MusicBeatSubstate
 
 		var characterPath:String = 'images/results/character/${chara}/dialogue.json';
 		var path:String = '';
-		#if MODS_ALLOWED
+		#if desktop
 			path = Paths.modFolders(characterPath);
 			if (!FileSystem.exists(path)) 
 				path = Paths.getPreloadPath(characterPath);
@@ -134,7 +134,7 @@ class ResultsScreenSubState extends MusicBeatSubstate
 			if (!Assets.exists(path))
 				path = Paths.getPreloadPath('images/results/character/sour/dialogue.json');
 		#end
-		#if MODS_ALLOWED
+		#if desktop
 		var rawJson = File.getContent(path);
 		#else
 		var rawJson = Assets.getText(path);
