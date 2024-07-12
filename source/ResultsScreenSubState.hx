@@ -19,6 +19,7 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxAxes;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
+import openfl.Assets;
 import haxe.Exception;
 import openfl.display.BitmapData;
 import openfl.geom.Matrix;
