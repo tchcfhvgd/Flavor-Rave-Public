@@ -96,7 +96,7 @@ class SunSynthState extends MusicBeatState
 
 	override function create()
 	{
-		FlxG.mouse.visible = ClientPrefs.menuMouse;
+		//FlxG.mouse.visible = ClientPrefs.menuMouse;
 		CoolUtil.difficulties = ["Normal"];
 		Paths.currentModDirectory = "";
 		instance = this;
@@ -273,6 +273,7 @@ class SunSynthState extends MusicBeatState
 
 				if(ClientPrefs.menuMouse)
 				{
+					#if !mobile
 					if(FlxG.mouse.wheel != 0)
 					{
 						FlxG.sound.play(Paths.sound('scrollMenu'), 0.5);
@@ -282,9 +283,28 @@ class SunSynthState extends MusicBeatState
 						else if (FlxG.mouse.wheel > 0)
 							changeItem(-1);		
 					}
+					#end
 	
 					choicerStuff.forEach(function(spr:SSMenuItem)
 					{
+					  #if mobile
+					  for (touch in FlxG.touches.list)
+					  {
+						if(touch.overlaps(spr))
+						{
+							if(touch.justPressed)
+							{
+								if (spr.ID != 0)
+									changeItem(spr.ID);
+								else
+								{
+									allowInput = false;
+									selectItem();
+								}
+							}
+						}
+					  }
+					  #else
 						if(FlxG.mouse.overlaps(spr))
 						{
 							if(FlxG.mouse.justPressed)
@@ -298,12 +318,15 @@ class SunSynthState extends MusicBeatState
 								}
 							}
 						}
+					#end
 					});
 				}
 			}
 			else 
 			{
-				if (controls.ACCEPT || ClientPrefs.menuMouse && FlxG.mouse.justPressed)
+				for (touch in FlxG.touches.list)
+				{
+				if (controls.ACCEPT || ClientPrefs.menuMouse && touch.justPressed)
 				{
 					if (!dialogueEnded)
 					{
@@ -320,6 +343,7 @@ class SunSynthState extends MusicBeatState
 						else
 							backToMainChoicer();
 					}
+				}
 				}
 			}
 
@@ -552,7 +576,7 @@ class SunSynthState extends MusicBeatState
 		var path:String = '';
 		var tjson:ThaiDialogueFile;
 		
-		#if MODS_ALLOWED
+		#if desktop
 			path = Paths.modFolders(jsonPath);
 			if (!FileSystem.exists(path)) 
 				path = Paths.getPreloadPath(jsonPath);
