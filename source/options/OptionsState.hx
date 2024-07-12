@@ -174,11 +174,21 @@ class OptionsState extends MusicBeatState
 	 if (virtualPad.buttonX.justPressed)
 		{
 			removeVirtualPad();
+			allowInput = false;
 			openSubState(new mobile.MobileControlsSubState());
 		}
 		if (virtualPad.buttonY.justPressed) {
 			removeVirtualPad();
+			FlxTween.cancelTweensOf(bgthingie);
+		FlxTween.tween(bgthingie, {x: -615}, 0.2, {ease: FlxEase.sineOut});
+
+		for (item in grpOptions.members)
+		{
+			FlxTween.cancelTweensOf(item);
+			FlxTween.tween(item, {x: -623}, 0.2, {ease: FlxEase.sineOut, startDelay: 0.05 + (item.ID * 0.01)});
+		}
 			openSubState(new mobile.AndroidSettingsSubState());
+			allowInput = false;
 		}
 	#end
 						
