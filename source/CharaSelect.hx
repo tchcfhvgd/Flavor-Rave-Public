@@ -226,6 +226,21 @@ class CharaSelect extends MusicBeatSubstate
 			{
 				selectGrp.forEach(function(spr:FlxSprite)
 				{
+				#if mobile
+				for (touch in FlxG.touches.list)
+				{
+					if(touch.overlaps(spr))
+					{
+						if (spr.ID != curSelected)
+						{
+							curSelected = spr.ID;
+							changeItem();
+						}
+						if(touch.justPressed)
+							totheSong();
+					}
+				}
+				#else
 					if(FlxG.mouse.overlaps(spr))
 					{
 						if (spr.ID != curSelected && FlxG.mouse.justMoved)
@@ -236,6 +251,7 @@ class CharaSelect extends MusicBeatSubstate
 						if(FlxG.mouse.justPressed)
 							totheSong();
 					}
+				#end
 				});
 			}
 		}
