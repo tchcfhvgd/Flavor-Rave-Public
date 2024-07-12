@@ -233,6 +233,7 @@ class StoryMenuState extends MusicBeatState
 
 			if(ClientPrefs.menuMouse)
 			{
+				#if !mobile
 				if (FlxG.mouse.wheel != 0)
 				{
 					FlxG.sound.play(Paths.sound('scrollMenu'), 0.5);
@@ -241,7 +242,24 @@ class StoryMenuState extends MusicBeatState
 					else if (FlxG.mouse.wheel > 0)
 						changeWeek(-1);	
 				}
+				#end
 
+			#if mobile
+			for (touch in FlxG.touches.list)
+			{
+				if(touch.overlaps(rightArrow) || touch.overlaps(leftArrow))
+				{
+					if(touch.justPressed)
+					{
+						persistentUpdate = false;
+						extraMenu = !extraMenu;
+						FlxG.sound.play(Paths.sound('scrollMenu'));
+						MusicBeatState.switchState(new StoryMenuState());
+					}
+				}
+			}
+				#else
+					
 				if(FlxG.mouse.overlaps(rightArrow) || FlxG.mouse.overlaps(leftArrow))
 				{
 					if(FlxG.mouse.justPressed)
@@ -252,9 +270,35 @@ class StoryMenuState extends MusicBeatState
 						MusicBeatState.switchState(new StoryMenuState());
 					}
 				}
+			#end
 
 				grpWeekText.forEach(function(spr:StoryItem)
 				{
+				#if mobile
+				for (touch in FlxG.touches.list)
+				{
+					if (touch.overlaps(spr) && (!touch.overlaps(rightArrow) || !touch.overlaps(leftArrow)))
+					{
+						if (touch.justPressed)
+						{
+							if (spr.ID != 0)
+							{
+								FlxG.sound.play(Paths.sound('scrollMenu'), 0.5);
+								changeWeek(spr.ID);
+							}
+							else if (!WeekData.weekIsLocked(loadedWeeks[curWeek].fileName))
+							{
+								var rec:Int = loadedWeeks[curWeek].recommended;
+								if (Math.isNaN(loadedWeeks[curWeek].recommended))
+									rec = 0;
+
+								FlxG.sound.play(Paths.sound('confirmMenu'));
+								openSubState(new CharaSelect('story', loadedWeeks[curWeek].charaSelect[0], loadedWeeks[curWeek].charaSelect[1], loadedWeeks[curWeek].fileName, rec));
+							}
+						}
+					}
+				}
+					#else
 					if (FlxG.mouse.overlaps(spr) && (!FlxG.mouse.overlaps(rightArrow) || !FlxG.mouse.overlaps(leftArrow)))
 					{
 						if (FlxG.mouse.justPressed)
@@ -275,6 +319,7 @@ class StoryMenuState extends MusicBeatState
 							}
 						}
 					}
+					#end
 				});
 			}
 		}
