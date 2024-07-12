@@ -212,7 +212,9 @@ class SunSynthFirstState extends MusicBeatState
 
 		if (allowInput)
 		{
-			if (controls.ACCEPT)
+		for (touch in FlxG.touches.list)
+		{
+			if (touch.justPressed)
 			{
 				if (!dialogueEnded)
 				{
@@ -226,6 +228,7 @@ class SunSynthFirstState extends MusicBeatState
 					endDialogue();
 				}
 			}
+		}
 		}
 	}
 
@@ -357,7 +360,7 @@ class SunSynthFirstState extends MusicBeatState
 		var path:String = '';
 		var tjson:ThaiDialogueFile;
 		
-		#if MODS_ALLOWED
+		#if desktop
 			path = Paths.modFolders(jsonPath);
 			if (!FileSystem.exists(path)) 
 				path = Paths.getPreloadPath(jsonPath);
