@@ -347,7 +347,7 @@ class SunSynthState extends MusicBeatState
 				}
 			}
 
-			if (controls.BACK && !letmeout && allowEscape)
+			if (controls.BACK #if android || FlxG.android.justReleased.BACK #end && !letmeout && allowEscape)
 			{
 				backToMainChoicer();
 			}
