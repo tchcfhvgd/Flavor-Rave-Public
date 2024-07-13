@@ -43,7 +43,7 @@ class ClientPrefs {
 	public static var displayNPS:Bool = true;
 	public static var displayRating:Bool = true;
 	public static var padalpha:Float = 0.6;
-	public static var hitboxalpha:Float = 0.15;
+	public static var hitboxalpha:Float = 0.5;
 	public static var showRating:Bool = true;
 	public static var timingIndicator:String = 'Precise';
 	public static var controllerMode:Bool = true;
