@@ -211,6 +211,14 @@ class FlavorpediaSideState extends MusicBeatState
 			changeItem();
 		});
 
+		#if mobile
+		addVirtualPad(UP_DOWN, NONE);
+		virtualPad.buttonUp.y -= 470;
+		virtualPad.buttonDown.y -= 590;
+		virtualPad.buttonUp.x += 1040;
+		virtualPad.buttonDown.x += 1165;
+		#end
+			
 		super.create();
 	}
 
