@@ -220,12 +220,14 @@ class VisualsUISubState extends BaseOptionsMenu
 			false);
 		addOption(option);
 		
+		#if !mobile
 		var option:Option = new Option('Mouse Navigation',
 			'Check this if you want to add\nthe ability to navigate Menus with your Mouse.',
 			'menuMouse',
 			'bool',
 			false);
 		addOption(option);
+		#end
 
 		super();
 		add(notes);
