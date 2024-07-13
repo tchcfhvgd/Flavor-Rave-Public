@@ -184,33 +184,6 @@ class PauseSubState extends MusicBeatSubstate
 		if (downP && canpressbuttons) changeSelection(1);
 		if (escape && canpressbuttons) close();
 
-		if (ClientPrefs.menuMouse && canpressbuttons)
-		{
-			if (FlxG.mouse.wheel != 0)
-			{
-				// Mouse wheel logic goes here, for example zooming in / out:
-				if (FlxG.mouse.wheel < 0)
-					changeSelection(1);
-				else if (FlxG.mouse.wheel > 0)
-					changeSelection(-1);	
-			}
-	
-			grpMenuShit.forEach(function(spr:PMenuItem)
-			{
-				if (FlxG.mouse.overlaps(spr))
-				{
-					if (FlxG.mouse.justPressed)
-					{
-						//This menu technically works but like, DUDE it doesn't function correctly???
-						if (spr.ID != 0)
-							changeSelection(spr.ID);
-						else
-							selectItem();
-					}
-				}
-			});
-		}
-
 		var daSelected:String = menuItems[curSelected];
 		switch (daSelected)
 		{
