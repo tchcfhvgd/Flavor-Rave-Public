@@ -135,11 +135,6 @@ class GameOverSubState extends MusicBeatSubstate
 			FlxTween.tween(yesbutt, {alpha: 1}, 0.3, {ease: FlxEase.sineOut});
 			FlxTween.tween(nobutt, {alpha: 1}, 0.3, {ease: FlxEase.sineOut});
 		});
-
-	        #if android
-                addVirtualPad(NONE, A_B);
-                addVirtualPadCamera(false);
-                #end
 	}
 
 	override function update(elapsed:Float)
@@ -179,6 +174,44 @@ class GameOverSubState extends MusicBeatSubstate
 
 			if(ClientPrefs.menuMouse)
 			{
+				#if mobile
+				for (touch in FlxG.touches.list)
+				{
+				if(touch.overlaps(yesbutt))
+				{
+				if (touch.justPressed)
+				{
+					if (curSelected != 0)
+					{
+						curSelected = 0;
+						changeItem();
+						FlxG.sound.play(Paths.sound('scrollMenu'));
+					}
+					else
+					{
+						endBullshit(true);
+					}
+				}
+				}
+
+				if(touch.overlaps(nobutt))
+				{
+				if (touch.justPressed)
+				{
+					if (curSelected != 1)
+					{
+						curSelected = 1;
+						changeItem();
+						FlxG.sound.play(Paths.sound('scrollMenu'));
+					}
+			                else
+					{
+						endBullshit(false);
+					}
+				}
+				}
+				}
+				#else
 				if(FlxG.mouse.overlaps(yesbutt))
 				{
 					if (FlxG.mouse.justMoved && curSelected != 0)
@@ -206,6 +239,7 @@ class GameOverSubState extends MusicBeatSubstate
 						endBullshit(false);
 					}
 				}
+				#end
 			}
 
 		}
