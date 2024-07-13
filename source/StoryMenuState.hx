@@ -170,6 +170,10 @@ class StoryMenuState extends MusicBeatState
 
 		changeWeek();
 
+		#if android
+                addVirtualPad(UP_DOWN, A_B_X_Y);
+                #end
+		
 		super.create();
 	}
 
@@ -188,8 +192,8 @@ class StoryMenuState extends MusicBeatState
 			var downP = controls.UI_DOWN_P;
 			var leftP = controls.UI_LEFT_P;
 			var rightP = controls.UI_RIGHT_P;
-			var ctrl = FlxG.keys.justPressed.CONTROL;
-			var mbutt = FlxG.keys.justPressed.M;
+			var ctrl = FlxG.keys.justPressed.CONTROL #if android || _virtualpad.buttonX.justPressed #end;
+			var mbutt = FlxG.keys.justPressed.M #if android || _virtualpad.buttonY.justPressed #end;
 			if (upP)
 			{
 				changeWeek(-1);
@@ -324,7 +328,7 @@ class StoryMenuState extends MusicBeatState
 			}
 		}
 
-		if (controls.BACK && !movedBack && !selectedWeek #if !FORCE_DEBUG_VERSION && ClientPrefs.pastOGWeek #end)
+		if (controls.BACK #if android || FlxG.android.justReleased.BACK #end && !movedBack && !selectedWeek #if !FORCE_DEBUG_VERSION && ClientPrefs.pastOGWeek #end)
 		{
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			movedBack = true;
