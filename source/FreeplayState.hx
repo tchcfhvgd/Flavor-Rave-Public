@@ -176,7 +176,7 @@ class FreeplayState extends MusicBeatState
 		modiOpti.updateHitbox();
 		add(modiOpti);
 
-		#if android
+		#if mobile
                 addVirtualPad(NONE, A_B_C_X_Y);
 		virtualPad.buttonB.y += 450;
 		virtualPad.buttonX.y += 120;
