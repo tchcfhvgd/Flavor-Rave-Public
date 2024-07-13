@@ -55,7 +55,7 @@ class StoryMenuState extends MusicBeatState
 	{
 		instance = this;
 
-		FlxG.mouse.visible = ClientPrefs.menuMouse;
+		//FlxG.mouse.visible = ClientPrefs.menuMouse;
 
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
@@ -192,8 +192,8 @@ class StoryMenuState extends MusicBeatState
 			var downP = controls.UI_DOWN_P;
 			var leftP = controls.UI_LEFT_P;
 			var rightP = controls.UI_RIGHT_P;
-			var ctrl = FlxG.keys.justPressed.CONTROL #if android || _virtualpad.buttonX.justPressed #end;
-			var mbutt = FlxG.keys.justPressed.M #if android || _virtualpad.buttonY.justPressed #end;
+			var ctrl = FlxG.keys.justPressed.CONTROL #if android || virtualPad.buttonX.justPressed #end;
+			var mbutt = FlxG.keys.justPressed.M #if android || virtualPad.buttonY.justPressed #end;
 			if (upP)
 			{
 				changeWeek(-1);
