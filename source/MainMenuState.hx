@@ -287,19 +287,18 @@ class MainMenuState extends MusicBeatState
 				   #if mobile
 				   for (touch in FlxG.touches.list)
 				   {
-				      if (touch.justPressed)
-				      {
-					if (touch.overlaps(spr) && curSelected != spr.ID)
+					if (touch.overlaps(spr) && curSelected != spr.ID && touch.justPressed)
 					{
 						curSelected = spr.ID;
+						FlxG.sound.play(Paths.sound('scrollMenu'));
 						changeItem();
 					}
-					else if(touch.overlaps(spr))
+					else if(touch.overlaps(spr) && touch.justPressed)
 					{
 						selectedSomethin = true;
 						selectItem();
 					}
-				      }
+				      
 				   }
 				   #else
 					if (FlxG.mouse.overlaps(spr) && curSelected != spr.ID && FlxG.mouse.justMoved)
@@ -315,13 +314,16 @@ class MainMenuState extends MusicBeatState
 				   #end
 				});
 
-				if (FlxG.mouse.overlaps(synsunIcon) && !synsunBool)
+				for (touch in FlxG.touches.list)
+				   {
+				if (touch.overlaps(synsunIcon) && !synsunBool && touch.justPressed)
 					highlightSynSun(true);
-				else if (!FlxG.mouse.overlaps(synsunIcon) && synsunBool)
+				else if (!touch.overlaps(synsunIcon) && synsunBool && touch.justPressed)
 					highlightSynSun(false);
 
-				if (FlxG.mouse.overlaps(synsunIcon) && FlxG.mouse.justPressed && synsunBool)
+				if (touch.overlaps(synsunIcon) && touch.justPressed && synsunBool)
 					totheSunSynthState();
+				      }
 			}
 		}
 
