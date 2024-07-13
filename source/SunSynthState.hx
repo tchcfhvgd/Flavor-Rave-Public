@@ -252,7 +252,7 @@ class SunSynthState extends MusicBeatState
 					FlxG.sound.play(Paths.sound('scrollMenu'));
 					changeItem(1);
 				}
-				else if (controls.BACK && letmeout)
+				else if (controls.BACK #if android || FlxG.android.justReleased.BACK #end && letmeout)
 				{
 					if (!inBaseChoicer)
 					{
