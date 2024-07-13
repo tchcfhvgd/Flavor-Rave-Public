@@ -176,6 +176,10 @@ class FreeplayState extends MusicBeatState
 		modiOpti.updateHitbox();
 		add(modiOpti);
 
+		#if android
+                addVirtualPad(NONE, A_B_C_X_Y);
+                #end
+		
 		super.create();
 	}
 
@@ -203,9 +207,9 @@ class FreeplayState extends MusicBeatState
 		var upP = controls.UI_UP_P;
 		var downP = controls.UI_DOWN_P;
 		var accepted = controls.ACCEPT;
-		var space = FlxG.keys.justPressed.SPACE;
-		var ctrl = FlxG.keys.justPressed.CONTROL;
-		var mbutt = FlxG.keys.justPressed.M;
+		var space = FlxG.keys.justPressed.SPACE #if android || _virtualpad.buttonX.justPressed #end;
+		var ctrl = FlxG.keys.justPressed.CONTROL #if android || _virtualpad.buttonY.justPressed #end;
+		var mbutt = FlxG.keys.justPressed.M #if android || _virtualpad.buttonC.justPressed #end;
 
 		var shiftMult:Int = 1;
 		if(FlxG.keys.pressed.SHIFT) shiftMult = 3;
@@ -276,7 +280,7 @@ class FreeplayState extends MusicBeatState
 				changeDiff(1);
 			else if (upP || downP) changeDiff();
 			
-			if (controls.BACK)
+			if (controls.BACK #if android || FlxG.android.justReleased.BACK #end)
 			{
 				persistentUpdate = false;
 				FlxG.sound.play(Paths.sound('cancelMenu'));
