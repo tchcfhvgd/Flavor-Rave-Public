@@ -42,7 +42,7 @@ class FlavorpediaSelectorState extends MusicBeatState
 
 	override function create()
 	{
-		FlxG.mouse.visible = ClientPrefs.menuMouse;
+		//FlxG.mouse.visible = ClientPrefs.menuMouse;
 		CoolUtil.difficulties = ["Normal"];
 
 		#if discord_rpc
@@ -110,7 +110,7 @@ class FlavorpediaSelectorState extends MusicBeatState
 				}
 			}
 
-			if (controls.BACK)
+			if (controls.BACK #if android || FlxG.android.justReleased.BACK #end)
 			{
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				MusicBeatState.switchState(new MainMenuState());
@@ -118,6 +118,28 @@ class FlavorpediaSelectorState extends MusicBeatState
 
 			if(ClientPrefs.menuMouse)
 			{
+				#if mobile
+				for (touch in FlxG.touches.list)
+				{
+				if(touch.overlaps(main))
+				{
+				if (touch.justPressed)
+				{
+					if (curSelected != 0)
+					{
+						curSelected = 0;
+						changeItem();
+						FlxG.sound.play(Paths.sound('scrollMenu'));
+					}
+					else
+					{
+						FlxG.sound.play(Paths.sound('confirmMenu'));
+						MusicBeatState.switchState(new FlavorpediaState());
+					}
+				}
+				}
+				}
+				#else
 				if(FlxG.mouse.overlaps(main))
 				{
 					if (FlxG.mouse.justMoved && curSelected != 0)
@@ -132,7 +154,28 @@ class FlavorpediaSelectorState extends MusicBeatState
 						MusicBeatState.switchState(new FlavorpediaState());
 					}
 				}
+				#end
 
+				#if mobile
+				for (touch in FlxG.touches.list)
+				{
+				if(touch.overlaps(side))
+				{
+				if (touch.justPressed)
+				{
+					if (curSelected != 1)
+					{
+						curSelected = 1;
+						changeItem();
+						FlxG.sound.play(Paths.sound('scrollMenu'));
+					}
+					else
+						FlxG.sound.play(Paths.sound('confirmMenu'));
+						MusicBeatState.switchState(new FlavorpediaSideState());
+				}
+				}
+				}
+				#else
 				if(FlxG.mouse.overlaps(side))
 				{
 					if (FlxG.mouse.justMoved && curSelected != 1)
@@ -147,6 +190,7 @@ class FlavorpediaSelectorState extends MusicBeatState
 						MusicBeatState.switchState(new FlavorpediaSideState());
 					}
 				}
+				#end
 			}
 			
 		}
