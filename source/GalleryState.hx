@@ -137,7 +137,7 @@ class GalleryState extends MusicBeatState
 
 		if (canPressButtons)
 		{
-			if (controls.BACK)
+			if (controls.BACK #if android || FlxG.android.justReleased.BACK #end)
 			{
 				if (!inGallery)	MusicBeatState.switchState(new MainMenuState());
 				else	backtoSelector();
@@ -176,10 +176,30 @@ class GalleryState extends MusicBeatState
 				{
 					arrows.forEach(function(spr:FlxSprite)
 					{
+					    #if mobile
+					    for (touch in FlxG.touches.list)
+					    {
+						if (touch.overlaps(spr) && touch.justPressed)
+							changeGalleryItem((spr.ID == 0 ? -1 : 1), (spr.ID == 0 ? 0 : 1));
+					    }
+					    #else
 						if (FlxG.mouse.overlaps(spr) && FlxG.mouse.justPressed)
 							changeGalleryItem((spr.ID == 0 ? -1 : 1), (spr.ID == 0 ? 0 : 1));
+					    #end
 					});
 		
+					#if mobile
+					for (touch in FlxG.touches.list)
+					{
+					if (touch.overlaps(switchState) && touch.justPressed)
+					{
+						FlxG.sound.play(Paths.sound('cancelMenu'));
+						backtoSelector();
+						switchState.scale.set(1.2, 1.2);
+						FlxTween.tween(switchState, {"scale.x": 1,"scale.y": 1}, 0.1, {ease: FlxEase.sineOut});
+					}
+					}
+				        #else
 					if (FlxG.mouse.overlaps(switchState) && FlxG.mouse.justPressed)
 					{
 						FlxG.sound.play(Paths.sound('cancelMenu'));
@@ -187,11 +207,29 @@ class GalleryState extends MusicBeatState
 						switchState.scale.set(1.2, 1.2);
 						FlxTween.tween(switchState, {"scale.x": 1,"scale.y": 1}, 0.1, {ease: FlxEase.sineOut});
 					}
+				        #end
 				}
 				else
 				{
 					gallerybuttons.forEach(function(spr:FlxSprite)
 					{
+					   #if mobile
+					   for (touch in FlxG.touches.list)
+					   {
+					      if (touch.justPressed)
+					      {
+						if (touch.overlaps(spr) && curSelected != spr.ID)
+						{
+							curSelected = spr.ID;
+							changeItem();
+						}
+                                                else if (touch.overlaps(spr))
+						{
+							loadGallState(spr.ID == 0);
+						}
+					      }
+					   }
+					   #else
 						if (FlxG.mouse.overlaps(spr) && curSelected != spr.ID && FlxG.mouse.justMoved)
 						{
 							curSelected = spr.ID;
@@ -202,7 +240,20 @@ class GalleryState extends MusicBeatState
 						{
 							loadGallState(spr.ID == 0);
 						}
+					   #end
 					});
+				    #if mobile
+				    for (touch in FlxG.touches.list)
+				    {
+					if (touch.overlaps(switchState) && touch.justPressed)
+					{
+						FlxG.sound.play(Paths.sound('cancelMenu'));
+						MusicBeatState.switchState(new MainMenuState());
+						switchState.scale.set(1.2, 1.2);
+						FlxTween.tween(switchState, {"scale.x": 1,"scale.y": 1}, 0.1, {ease: FlxEase.sineOut});
+					}
+				    }
+				    #else
 					if (FlxG.mouse.overlaps(switchState) && FlxG.mouse.justPressed)
 					{
 						FlxG.sound.play(Paths.sound('cancelMenu'));
@@ -210,6 +261,7 @@ class GalleryState extends MusicBeatState
 						switchState.scale.set(1.2, 1.2);
 						FlxTween.tween(switchState, {"scale.x": 1,"scale.y": 1}, 0.1, {ease: FlxEase.sineOut});
 					}
+				    #end
 				}
 			}
 		}
