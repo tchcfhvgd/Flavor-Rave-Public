@@ -320,8 +320,7 @@ class MainMenuState extends MusicBeatState
 					highlightSynSun(true);
 				else if (!touch.overlaps(synsunIcon) && synsunBool && touch.justPressed)
 					highlightSynSun(false);
-
-				if (touch.overlaps(synsunIcon) && touch.justPressed && synsunBool)
+                                else if (touch.overlaps(synsunIcon) && touch.justPressed && synsunBool)
 					totheSunSynthState();
 				      }
 			}
