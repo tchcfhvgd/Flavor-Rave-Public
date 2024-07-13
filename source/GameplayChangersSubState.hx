@@ -64,6 +64,11 @@ class GameplayChangersSubState extends MusicBeatSubstate
 		});
 
 		changeSelection();
+
+		#if mobile
+                addVirtualPad(LEFT_FULL, A_B);
+                addVirtualPadCamera(false);
+                #end
 	}
 
 	override function update(elapsed:Float):Void
