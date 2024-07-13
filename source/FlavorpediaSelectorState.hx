@@ -170,8 +170,10 @@ class FlavorpediaSelectorState extends MusicBeatState
 						FlxG.sound.play(Paths.sound('scrollMenu'));
 					}
 					else
+					{
 						FlxG.sound.play(Paths.sound('confirmMenu'));
 						MusicBeatState.switchState(new FlavorpediaSideState());
+					}
 				}
 				}
 				}
