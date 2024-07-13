@@ -55,7 +55,7 @@ class FreeplayState extends MusicBeatState
 
 	override function create()
 	{
-		FlxG.mouse.visible = ClientPrefs.menuMouse;
+		//FlxG.mouse.visible = ClientPrefs.menuMouse;
 		
 		persistentUpdate = true;
 		PlayState.isStoryMode = false;
@@ -207,9 +207,9 @@ class FreeplayState extends MusicBeatState
 		var upP = controls.UI_UP_P;
 		var downP = controls.UI_DOWN_P;
 		var accepted = controls.ACCEPT;
-		var space = FlxG.keys.justPressed.SPACE #if android || _virtualpad.buttonX.justPressed #end;
-		var ctrl = FlxG.keys.justPressed.CONTROL #if android || _virtualpad.buttonY.justPressed #end;
-		var mbutt = FlxG.keys.justPressed.M #if android || _virtualpad.buttonC.justPressed #end;
+		var space = FlxG.keys.justPressed.SPACE #if android || virtualPad.buttonX.justPressed #end;
+		var ctrl = FlxG.keys.justPressed.CONTROL #if android || virtualPad.buttonY.justPressed #end;
+		var mbutt = FlxG.keys.justPressed.M #if android || virtualPad.buttonC.justPressed #end;
 
 		var shiftMult:Int = 1;
 		if(FlxG.keys.pressed.SHIFT) shiftMult = 3;
