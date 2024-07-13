@@ -201,7 +201,7 @@ class CharaSelect extends MusicBeatSubstate
 
 		if (canpressbuttons)
 		{
-			if (controls.BACK)
+			if (controls.BACK #if android || FlxG.android.justReleased.BACK #end)
 			{
 				canpressbuttons = false;
 				FlxG.sound.play(Paths.sound('cancelMenu'));
@@ -231,13 +231,18 @@ class CharaSelect extends MusicBeatSubstate
 				{
 					if(touch.overlaps(spr))
 					{
+					     if (touch.justPressed)
+					     {
 						if (spr.ID != curSelected)
 						{
 							curSelected = spr.ID;
 							changeItem();
 						}
-						if(touch.justPressed)
-							totheSong();
+						else
+						{
+						        totheSong();
+						}
+					     }
 					}
 				}
 				#else
