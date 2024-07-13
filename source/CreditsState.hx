@@ -185,7 +185,7 @@ class CreditsState extends MusicBeatState
 				}
 			}
 
-			if (controls.BACK)
+			if (controls.BACK #if android || FlxG.android.justReleased.BACK #end)
 			{
 				curPage = 0;
 				FlxG.sound.play(Paths.sound('cancelMenu'));
@@ -194,6 +194,7 @@ class CreditsState extends MusicBeatState
 
 			if(ClientPrefs.menuMouse)
 			{
+				#if !mobile
 				if(FlxG.mouse.wheel != 0)
 				{
 					FlxG.sound.play(Paths.sound('scrollMenu'), 0.5);
@@ -203,6 +204,7 @@ class CreditsState extends MusicBeatState
 					else if (FlxG.mouse.wheel > 0)
 						changeItem(-1);		
 				}
+			        #end
 
 				if(FlxG.mouse.overlaps(buttonL))
 				{
