@@ -12,7 +12,7 @@ class ClientPrefs {
 	public static var opponentStrums:Bool = true;
 	public static var showFPS:Bool = false;
 	public static var mobileCEx:Bool = false;
-	public static var hitboxType:String = "No Gradient";
+	public static var hitboxType:String = "Gradient";
 	public static var hitboxPos:Bool = true;
 	public static var showMemory:Bool = false;
 	public static var showPeak:Bool = false;
@@ -46,9 +46,9 @@ class ClientPrefs {
 	public static var hitboxalpha:Float = 0.15;
 	public static var showRating:Bool = true;
 	public static var timingIndicator:String = 'Precise';
-	public static var controllerMode:Bool = false;
+	public static var controllerMode:Bool = true;
 	public static var autoPause:Bool = false;
-	public static var menuMouse:Bool = false;
+	public static var menuMouse:Bool = true;
 	public static var mainmenuMusic:String = 'freakyMenu';
 	public static var pastOGWeek:Bool = false;
 	public static var hitsoundVolume:Float = 0;
