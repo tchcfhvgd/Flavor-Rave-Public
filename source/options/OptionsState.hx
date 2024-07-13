@@ -199,6 +199,7 @@ class OptionsState extends MusicBeatState
 
 		grpOptions.forEach(function(spr:OptionsItem) 
 		{
+			#if !mobile
 			if (ClientPrefs.menuMouse) 
 			{
 				if (FlxG.mouse.overlaps(spr)) 
@@ -215,6 +216,7 @@ class OptionsState extends MusicBeatState
 					}
 				}
 			}
+			#end
 		});
 	}
 
