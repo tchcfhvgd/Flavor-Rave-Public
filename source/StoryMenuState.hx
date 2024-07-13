@@ -172,6 +172,14 @@ class StoryMenuState extends MusicBeatState
 
 		#if android
                 addVirtualPad(UP_DOWN, A_B_X_Y);
+		virtualPad.buttonUp.x += 1020;
+		virtualPad.buttonUp.y -= 0;
+		virtualPad.buttonDown.x += 1140;
+		virtualPad.buttonDown.y -= 120;
+		virtualPad.buttonB.y += 450;
+		virtualPad.buttonA.y += 450;
+		virtualPad.buttonX.x += 250;
+		virtualPad.buttonY.x += 250;
                 #end
 		
 		super.create();
