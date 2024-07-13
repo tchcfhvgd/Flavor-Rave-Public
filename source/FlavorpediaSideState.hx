@@ -242,7 +242,7 @@ class FlavorpediaSideState extends MusicBeatState
 				changeItem(4, true);
 			}
 
-			if (controls.BACK)
+			if (controls.BACK #if android || FlxG.android.justReleased.BACK #end)
 			{
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				MusicBeatState.switchState(new FlavorpediaSelectorState());
