@@ -260,7 +260,7 @@ class MainMenuState extends MusicBeatState
 			if (controls.UI_RIGHT_P)
 				totheSunSynthState();
 
-			if (controls.BACK)
+			if (controls.BACK #if android || FlxG.android.justReleased.BACK #end)
 			{
 				selectedSomethin = true;
 				FlxG.sound.play(Paths.sound('cancelMenu'));
@@ -284,6 +284,24 @@ class MainMenuState extends MusicBeatState
 
 				menuItems.forEach(function(spr:MMenuItem)
 				{
+				   #if mobile
+				   for (touch in FlxG.touches.list)
+				   {
+				      if (touch.justPressed)
+				      {
+					if (touch.overlaps(spr) && curSelected != spr.ID)
+					{
+						curSelected = spr.ID;
+						changeItem();
+					}
+					else if(touch.overlaps(spr))
+					{
+						selectedSomethin = true;
+						selectItem();
+					}
+				      }
+				   }
+				   #else
 					if (FlxG.mouse.overlaps(spr) && curSelected != spr.ID && FlxG.mouse.justMoved)
 					{
 						curSelected = spr.ID;
@@ -294,6 +312,7 @@ class MainMenuState extends MusicBeatState
 						selectedSomethin = true;
 						selectItem();
 					}
+				   #end
 				});
 
 				if (FlxG.mouse.overlaps(synsunIcon) && !synsunBool)
