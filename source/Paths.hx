@@ -407,7 +407,7 @@ class Paths
 		gottenPath = gottenPath.substring(gottenPath.indexOf(':') + 1, gottenPath.length);
 		// trace(gottenPath);
 		if(!currentTrackedSounds.exists(gottenPath))
-		#if MODS_ALLOWED
+		#if desktop
 		{
 			if(async) Sound.loadFromFile('$gottenPath').onComplete(sound -> {currentTrackedSounds.set(gottenPath, sound);});
 			else currentTrackedSounds.set(gottenPath, Sound.fromFile('$gottenPath'));
