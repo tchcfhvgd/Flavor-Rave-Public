@@ -178,10 +178,14 @@ class FreeplayState extends MusicBeatState
 
 		#if mobile
                 addVirtualPad(NONE, A_B_C_X_Y);
-		virtualPad.buttonB.y += 450;
-		virtualPad.buttonX.y += 120;
-		virtualPad.buttonY.y += 120;
+	        virtualPad.buttonB.y += 450;
+		virtualPad.buttonX.y += 80;
+		virtualPad.buttonY.y += 80;
+		virtualPad.buttonC.y -= 40;
 		virtualPad.buttonA.y += 450;
+		virtualPad.buttonC.x -= 880;
+		virtualPad.buttonX.x -= 880;
+		virtualPad.buttonY.x -= 880;
                 #end
 		
 		super.create();
