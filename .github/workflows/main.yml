@@ -52,7 +52,7 @@ jobs:
            path: /home/runner
 
       - name: Move Android File
-        run: mv /home/runner/PsychEngine-release.apk /home/runner/PsychEngine-Android.apk
+        run: mv /home/runner/FlavorRave-release.apk /home/runner/FlavorRave-Android.apk
 
       - name: Publish The Release
         uses: marvinpinto/action-automatic-releases@latest
