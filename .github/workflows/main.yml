@@ -63,4 +63,3 @@ jobs:
           title: "DevBuild 5112f18"
           files: |
             /home/runner/*.apk
-            /home/runner/*.zip
