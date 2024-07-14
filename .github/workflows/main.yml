@@ -55,8 +55,8 @@ jobs:
           haxelib install openfl 9.3.2
           haxelib --never install flixel 5.5.0
           haxelib run lime setup flixel
-          haxelib install flixel-tools
-          haxelib install flixel-ui
+          haxelib install flixel-tools 1.5.1
+          haxelib install flixel-ui 2.5.0
           haxelib install flixel-addons 3.2.1
           haxelib install tjson
           haxelib install hxjsonast
