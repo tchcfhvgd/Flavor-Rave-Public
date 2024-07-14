@@ -2,10 +2,12 @@
 	"dependencies":
 	[
 		{
-			"name": "lime",
-			"type": "haxelib",
-			"version": "8.1.1"
-		},
+      "name": "lime",
+      "type": "git",
+      "dir": null,
+      "ref": "develop",
+      "url": "https://github.com/mcagabe19-stuff/lime"
+    },
 		{
 			"name": "openfl",
 			"type": "haxelib",
@@ -32,9 +34,12 @@
 			"version": "2.5.0"
 		},
 		{
-			"name": "hxcpp",
-			"type": "haxelib"
-		},
+      "name": "hxcpp",
+      "type": "git",
+      "dir": null,
+      "ref": "master",
+      "url": "https://github.com/mcagabe19-stuff/hxcpp"
+    },
 		{
 			"name": "hxjsonast",
 			"type": "haxelib"
@@ -55,12 +60,6 @@
 			"version": "1.2.4"
 		},
 		{
-			"name": "discord_rpc",
-			"type": "git",
-			"ref": "2d83fa863ef0c1eace5f1cf67c3ac315d1a3a8a5",
-			"url": "https://github.com/Aidan63/linc_discord-rpc.git"
-		},
-		{
 			"name": "flxanimate",
 			"type": "git",
 			"ref": "8f379662568135d979f5afc60e38510fb521063a",
@@ -73,10 +72,18 @@
 			"url": "https://github.com/ianharrigan/hscript-ex.git"
 		},
 		{
-			"name": "linc_luajit",
-			"type": "git",
-			"ref": "bcb4254e057f8a20710e2cd0985086370d57ecd1",
-			"url": "https://github.com/nebulazorua/linc_luajit.git"
+      "name": "linc_luajit",
+      "type": "git",
+      "dir": null,
+      "ref": "main",
+      "url": "https://github.com/mcagabe19-stuff/linc_luajit-legacy.git"
+    },
+		{
+      "name": "extension-androidtools",
+      "type": "git",
+      "dir": null,
+      "ref": "SAF",
+      "url": "https://github.com/MobilePorting/extension-androidtools-Base.git"
 		}
 	]
 }
